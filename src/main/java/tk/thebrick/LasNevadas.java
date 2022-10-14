@@ -1,5 +1,6 @@
 package tk.thebrick;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
@@ -7,12 +8,15 @@ import net.dv8tion.jda.api.sharding.ShardManager;
 
 import javax.security.auth.login.LoginException;
 
-public class Main {
+public class LasNevadas {
 
+    private final Dotenv config;
     private final ShardManager shardManager;
 
-    public Main() throws LoginException {
-        String token = "MTAzMDMxODgzNjY1MTY1NTE5OA.G5lAYd.TneMjqimPQDtW5bZm5zlp92SYsRaEeUYRP1ePE";
+    public LasNevadas() throws LoginException {
+        config = Dotenv.configure().load();
+        String token = config.get("TOKEN");
+
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(token)
                 .setStatus(OnlineStatus.ONLINE)
                 .setActivity(Activity.playing("Poker"));
@@ -23,7 +27,15 @@ public class Main {
         return shardManager;
     }
 
+    public Dotenv getConfig() {
+        return config;
+    }
+
     public static void main(String[] args) {
-        Main bot =  
+        try {
+            LasNevadas bot = new LasNevadas();
+        } catch (LoginException e) {
+            System.out.println("ERROR: provided bot token is invalid");
+        }
     }
 }
