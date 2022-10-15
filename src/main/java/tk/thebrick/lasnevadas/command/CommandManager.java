@@ -1,6 +1,7 @@
 package tk.thebrick.lasnevadas.command;
 
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import org.slf4j.Logger;
@@ -42,7 +43,7 @@ public class CommandManager {
                     }
                 }
             } catch (NullPointerException e) {
-                LOGGER.error("Invalid Guild ID: {}.", guildID);
+                LOGGER.error("Invalid Guild ID: {}.", guildID);  // FIXME test
             }
         } else {
             for (Command command : getCommands()) {
@@ -58,6 +59,14 @@ public class CommandManager {
             }
         }
 
+    }
+
+    public void runCommand(SlashCommandInteraction interaction) {
+        for (Command command : getCommands()) {
+            if (command.getName().equals(interaction.getName())) {
+                command.execute(interaction);
+            }
+        }
     }
 
 }

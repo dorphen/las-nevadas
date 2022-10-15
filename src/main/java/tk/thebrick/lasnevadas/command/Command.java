@@ -13,7 +13,7 @@ public abstract class Command {
         return null;
     }
 
-    public void onExecute(SlashCommandInteraction interaction){
+    public void execute(SlashCommandInteraction interaction){
         interaction.reply("Command not found!").setEphemeral(true).queue();
     }
 
