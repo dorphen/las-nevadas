@@ -9,6 +9,7 @@ public abstract class Command {
     public abstract String getName();
     public abstract String getDescription();
 
+    @SuppressWarnings("SameReturnValue")
     public ArrayList<CommandArg> getCommandArgs(){
         return null;
     }
