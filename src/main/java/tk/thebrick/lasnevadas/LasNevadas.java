@@ -1,6 +1,5 @@
 package tk.thebrick.lasnevadas;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
@@ -10,13 +9,10 @@ import javax.security.auth.login.LoginException;
 
 public class LasNevadas {
 
-    private final Dotenv config;
     private final ShardManager shardManager;
 
     public LasNevadas() throws LoginException {
-        config = Dotenv.configure().load();
-
-        DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(config.get("TOKEN"))
+        DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(Config.get("TOKEN"))
                 .setStatus(OnlineStatus.ONLINE)
                 .setActivity(Activity.playing("Poker"));
         shardManager = builder.build();
@@ -24,10 +20,6 @@ public class LasNevadas {
 
     public ShardManager getShardManager() {
         return shardManager;
-    }
-
-    public Dotenv getConfig() {
-        return config;
     }
 
     public static void main(String[] args) {
