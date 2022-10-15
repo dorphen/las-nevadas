@@ -3,12 +3,15 @@ package tk.thebrick.lasnevadas.command;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class CommandManager {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommandManager.class);
     private final ArrayList<Command> commands;
 
     public ArrayList<Command> getCommands() {
@@ -39,7 +42,7 @@ public class CommandManager {
                     }
                 }
             } catch (NullPointerException e) {
-                System.out.println("Invalid Guild ID!");
+                LOGGER.error("Invalid Guild ID: {}.", guildID);
             }
         } else {
             for (Command command : getCommands()) {

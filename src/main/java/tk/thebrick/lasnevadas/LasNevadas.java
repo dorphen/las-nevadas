@@ -4,11 +4,14 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
 
 public class LasNevadas {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(LasNevadas.class);
     private final ShardManager shardManager;
 
     public LasNevadas() throws LoginException {
@@ -28,7 +31,7 @@ public class LasNevadas {
         try {
             LasNevadas bot = new LasNevadas();
         } catch (LoginException e) {
-            System.out.println("ERROR: provided bot token is invalid");
+            LOGGER.error("Provided bot token is invalid.");
         }
     }
 }
