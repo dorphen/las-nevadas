@@ -15,7 +15,7 @@ public class EventListener extends ListenerAdapter {
 
     @Override
     public void onReady(@NotNull ReadyEvent event) {
-        LOGGER.info("Connected as {}.", event.getJDA().getSelfUser().getAsTag());
+        LOGGER.info("Connected as [{}].", event.getJDA().getSelfUser().getAsTag());
 
         commandManager = new CommandManager(event.getJDA(), Long.parseLong(Config.get("TEST_GUILD")));  //  FIXME null for pushing commands
     }

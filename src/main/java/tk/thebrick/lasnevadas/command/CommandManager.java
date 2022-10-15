@@ -31,6 +31,7 @@ public class CommandManager {
 
         if (guildID != null) {
             try {
+                LOGGER.info("Adding commands to guild [{}].", Objects.requireNonNull(jda.getGuildById(guildID)).getName());
                 for (Command command : getCommands()) {
                     if (command.getCommandArgs() == null) {  // no options
                         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand(command.getName(), command.getDescription()).queue();
@@ -43,9 +44,10 @@ public class CommandManager {
                     }
                 }
             } catch (NullPointerException e) {
-                LOGGER.error("Invalid Guild ID: {}.", guildID);  // FIXME test
+                LOGGER.error("Invalid Guild ID: {}.", guildID);
             }
         } else {
+            LOGGER.info("Adding commands globally.");
             for (Command command : getCommands()) {
                 if (command.getCommandArgs() == null) {  // no options
                     jda.upsertCommand(command.getName(), command.getDescription()).queue();
