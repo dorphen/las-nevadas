@@ -16,6 +16,8 @@ public class LasNevadas {
                 .setStatus(OnlineStatus.ONLINE)
                 .setActivity(Activity.playing("Poker"));
         shardManager = builder.build();
+
+        shardManager.addEventListener(new EventListener());
     }
 
     public ShardManager getShardManager() {
