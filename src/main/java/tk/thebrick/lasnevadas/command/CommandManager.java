@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tk.thebrick.lasnevadas.command.basic.Ping;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -22,6 +23,7 @@ public class CommandManager {
     public CommandManager(JDA jda, Long guildID) {
         commands = new ArrayList<>();
 
+        commands.add(new Ping());
         // commands.add(new CommandName());
 
         registerCommands(jda, guildID);
