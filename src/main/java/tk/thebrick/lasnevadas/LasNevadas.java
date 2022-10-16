@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tk.thebrick.lasnevadas.database.DBClient;
 
 public class LasNevadas {
 
@@ -14,6 +15,8 @@ public class LasNevadas {
     private final ShardManager shardManager;
 
     public LasNevadas() throws InvalidTokenException {
+        DBClient.getGuildCollection();
+
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(Config.get("TOKEN"))
                 .setStatus(OnlineStatus.ONLINE)
                 .setActivity(Activity.playing("Poker"));
